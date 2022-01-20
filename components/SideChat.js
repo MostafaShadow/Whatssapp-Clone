@@ -14,7 +14,7 @@ const SideChat = ({ users, id, timestamp, latestMessage }) => {
   const router = useRouter();
   const sideChatRef = useRef(null);
   const handleOpenChat = () => {
-    router.push(`${id}`);
+    router.push(`/${id}`);
   };
 
 

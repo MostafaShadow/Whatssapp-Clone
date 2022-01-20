@@ -1,9 +1,16 @@
 import styled from "styled-components";
 import Chat from "../components/Chat";
-import { doc, getDoc, getDocs  , query , orderBy , collection } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  orderBy,
+  collection,
+} from "firebase/firestore";
 import { db } from "../features/firebase";
 
-const Chatbox = ({ chat, id  }) => {
+const Chatbox = ({ chat, id }) => {
   return (
     <ChatboxC>
       <ChatContainerC>
@@ -30,7 +37,7 @@ export async function getServerSideProps(context) {
     props: {
       chat: JSON.stringify(docSnap.data()) || null,
       id: context.query.id || null,
-      // messages:JSON.stringify(messages) || null,
+      // messages: JSON.stringify(messages) || null,
     },
   };
 }
@@ -57,11 +64,5 @@ const ChatContainerC = styled.div`
   ::-webkit-scrollbar-thumb {
     background-color: rgba(255, 255, 255, 0.1);
   }
-  /* @media (max-width: 600px) {
-    ::-webkit-scrollbar {
-      display: none;
-    }
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  } */
+
 `;
