@@ -28,7 +28,7 @@ import "emoji-mart/css/emoji-mart.css";
 import SearchIcon from "@mui/icons-material/Search";
 import MenuseChat from "./helper/MenuesChat";
 
-const Chat = ({ chat, chat_id }) => {
+const Chat = ({ chat, chat_id, message }) => {
   const [friends, setFriends] = useState({});
   const [messages, setMessages] = useState([]);
   const [isEmoji, setIsEmoji] = useState(false);
@@ -38,9 +38,13 @@ const Chat = ({ chat, chat_id }) => {
   const [user] = useAuthState(auth);
   const chatParse = JSON.parse(chat);
 
+  useEffect(() => {
+    setMessages(JSON.parse(message));
+  }, []);
   const goEndChat = () => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+
   useEffect(() => {
     goEndChat();
   }, [messages]);
@@ -61,12 +65,10 @@ const Chat = ({ chat, chat_id }) => {
   }, [chat_id]);
 
   useEffect(() => {
-    if (chatParse?.users?.length > 0) {
+    if (chatParse.users?.length > 0) {
       getFriendsData(chatParse.users).then((data) => {
         setFriends(data);
       });
-    } else {
-      console.log("without chatparse");
     }
   }, [chat_id]);
 
